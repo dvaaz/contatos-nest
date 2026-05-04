@@ -15,6 +15,8 @@ Esse projeto tem como objetivo estudar as causas de conflitos na conexão NESTJS
 
    * nota, o guia do site prisma gez com que dois schema.prisma fossem criados
 
+   É nescessário que haja um modulo para exportar o prisma service
+
 
 
 ## License
