@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import type { RoleDto } from './dto/role.dto';
-import { PrismaService } from '../database/prisma/prisma.service.js';
+import { PrismaService } from '../database/prisma/prisma.service';
 import { Prisma, Roles } from '../generated/prisma/client.js';
 
 @Injectable()
@@ -8,8 +8,10 @@ export class RolesService {
   constructor(private prisma: PrismaService) {}
 
   async test() {
-        console.log('Prisma Instance:', this.prisma);
-        console.log('Roles Model:', this.prisma?.roles); // Veja se isso imprime 'undefined'
+    const modelNames = Object.keys(this.prisma).filter(key => !key.startsWith('$') && !key.startsWith('_'));
+    console.log('Prisma Instance:', this.prisma);
+    console.log('Roles Model:', this.prisma?.roles); // Verificando se o modelo 'roles' está disponível no Prisma Client
+    console.log('Modelos disponíveis no seu PrismaClient:', modelNames);
   }
 
   /**
