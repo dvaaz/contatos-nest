@@ -18,9 +18,9 @@ export class RolesController {
     return this.rolesService.create(data);
   }
   
-  @Get('find/:id')
-  findOne(@Param('id') id: string) : Promise<Role | null> {
-    return this.rolesService.findRole({ id: id });
+  @Get('find/:name')
+  findOne(@Param('name') name: string) : Promise<Role | null> {
+    return this.rolesService.findRole({ name: name });
   }
 
   @Get('all')
@@ -29,15 +29,15 @@ export class RolesController {
   }
 
 
-  @Patch('update/:id')
-  update(@Param('id') id: string, @Body() updateRoleDto: RoleDto): Promise<Role> {
+  @Patch('update/:name')
+  update(@Param('name') name: string, @Body() updateRoleDto: RoleDto): Promise<Role> {
     return this.rolesService.update({ 
-      where: { id: id }, data: updateRoleDto 
+      where: { name: name }, data: updateRoleDto 
     });
   }
 
-  @Delete('delete/:id')
-  remove(@Param('id') id: string) : Promise<Role> {
-    return this.rolesService.remove({ id: id });
+  @Delete('delete/:name')
+  remove(@Param('name') name: string) : Promise<Role> {
+    return this.rolesService.remove({ name: name });
   }
 }

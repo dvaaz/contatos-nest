@@ -8,7 +8,7 @@ dotenv.config();
 export class PrismaService
   extends PrismaClient
   implements OnModuleInit, OnModuleDestroy {
-  private readonly logger = new Logger(PrismaService.name); // Logger para registrar mensagens de log
+  // private readonly logger = new Logger(PrismaService.name); // Logger para registrar mensagens de log
 
   constructor() {
     const connectionString = process.env.DATABASE_URL;
@@ -26,7 +26,7 @@ export class PrismaService
   }
 
   async onModuleInit() {
-    this.logger.log('Connecting to database...');
+    // this.logger.log('Connecting to database...');
     await this.$connect();
   }
 
