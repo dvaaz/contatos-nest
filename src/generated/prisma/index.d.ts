@@ -977,7 +977,7 @@ export namespace Prisma {
     email: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    roleId: string | null
+    roleName: string | null
   }
 
   export type UsersMaxAggregateOutputType = {
@@ -986,7 +986,7 @@ export namespace Prisma {
     email: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    roleId: string | null
+    roleName: string | null
   }
 
   export type UsersCountAggregateOutputType = {
@@ -995,7 +995,7 @@ export namespace Prisma {
     email: number
     createdAt: number
     updatedAt: number
-    roleId: number
+    roleName: number
     _all: number
   }
 
@@ -1014,7 +1014,7 @@ export namespace Prisma {
     email?: true
     createdAt?: true
     updatedAt?: true
-    roleId?: true
+    roleName?: true
   }
 
   export type UsersMaxAggregateInputType = {
@@ -1023,7 +1023,7 @@ export namespace Prisma {
     email?: true
     createdAt?: true
     updatedAt?: true
-    roleId?: true
+    roleName?: true
   }
 
   export type UsersCountAggregateInputType = {
@@ -1032,7 +1032,7 @@ export namespace Prisma {
     email?: true
     createdAt?: true
     updatedAt?: true
-    roleId?: true
+    roleName?: true
     _all?: true
   }
 
@@ -1128,7 +1128,7 @@ export namespace Prisma {
     email: string
     createdAt: Date
     updatedAt: Date
-    roleId: string
+    roleName: string
     _count: UsersCountAggregateOutputType | null
     _avg: UsersAvgAggregateOutputType | null
     _sum: UsersSumAggregateOutputType | null
@@ -1156,7 +1156,7 @@ export namespace Prisma {
     email?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    roleId?: boolean
+    roleName?: boolean
     contacts?: boolean | Users$contactsArgs<ExtArgs>
     _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["users"]>
@@ -1168,7 +1168,7 @@ export namespace Prisma {
     email?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    roleId?: boolean
+    roleName?: boolean
   }
 
   export type UsersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1187,7 +1187,7 @@ export namespace Prisma {
       email: string
       createdAt: Date
       updatedAt: Date
-      roleId: string
+      roleName: string
     }, ExtArgs["result"]["users"]>
     composites: {}
   }
@@ -1563,7 +1563,7 @@ export namespace Prisma {
     readonly email: FieldRef<"Users", 'String'>
     readonly createdAt: FieldRef<"Users", 'DateTime'>
     readonly updatedAt: FieldRef<"Users", 'DateTime'>
-    readonly roleId: FieldRef<"Users", 'String'>
+    readonly roleName: FieldRef<"Users", 'String'>
   }
     
 
@@ -2834,7 +2834,7 @@ export namespace Prisma {
     email: 'email',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    roleId: 'roleId'
+    roleName: 'roleName'
   };
 
   export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
@@ -2904,7 +2904,7 @@ export namespace Prisma {
     email?: StringFilter<"Users"> | string
     createdAt?: DateTimeFilter<"Users"> | Date | string
     updatedAt?: DateTimeFilter<"Users"> | Date | string
-    roleId?: StringFilter<"Users"> | string
+    roleName?: StringFilter<"Users"> | string
     contacts?: ContactsListRelationFilter
   }
 
@@ -2914,7 +2914,7 @@ export namespace Prisma {
     email?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    roleId?: SortOrder
+    roleName?: SortOrder
     contacts?: ContactsOrderByRelationAggregateInput
   }
 
@@ -2927,7 +2927,7 @@ export namespace Prisma {
     name?: StringFilter<"Users"> | string
     createdAt?: DateTimeFilter<"Users"> | Date | string
     updatedAt?: DateTimeFilter<"Users"> | Date | string
-    roleId?: StringFilter<"Users"> | string
+    roleName?: StringFilter<"Users"> | string
     contacts?: ContactsListRelationFilter
   }, "id" | "email">
 
@@ -2937,7 +2937,7 @@ export namespace Prisma {
     email?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    roleId?: SortOrder
+    roleName?: SortOrder
     _count?: UsersCountOrderByAggregateInput
     _avg?: UsersAvgOrderByAggregateInput
     _max?: UsersMaxOrderByAggregateInput
@@ -2954,7 +2954,7 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"Users"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Users"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Users"> | Date | string
-    roleId?: StringWithAggregatesFilter<"Users"> | string
+    roleName?: StringWithAggregatesFilter<"Users"> | string
   }
 
   export type ContactsWhereInput = {
@@ -3019,7 +3019,7 @@ export namespace Prisma {
     email: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    roleId: string
+    roleName: string
     contacts?: ContactsCreateNestedManyWithoutUserInput
   }
 
@@ -3029,7 +3029,7 @@ export namespace Prisma {
     email: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    roleId: string
+    roleName: string
     contacts?: ContactsUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -3038,7 +3038,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    roleId?: StringFieldUpdateOperationsInput | string
+    roleName?: StringFieldUpdateOperationsInput | string
     contacts?: ContactsUpdateManyWithoutUserNestedInput
   }
 
@@ -3048,7 +3048,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    roleId?: StringFieldUpdateOperationsInput | string
+    roleName?: StringFieldUpdateOperationsInput | string
     contacts?: ContactsUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -3058,7 +3058,7 @@ export namespace Prisma {
     email: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    roleId: string
+    roleName: string
   }
 
   export type UsersUpdateManyMutationInput = {
@@ -3066,7 +3066,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    roleId?: StringFieldUpdateOperationsInput | string
+    roleName?: StringFieldUpdateOperationsInput | string
   }
 
   export type UsersUncheckedUpdateManyInput = {
@@ -3075,7 +3075,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    roleId?: StringFieldUpdateOperationsInput | string
+    roleName?: StringFieldUpdateOperationsInput | string
   }
 
   export type ContactsCreateInput = {
@@ -3182,7 +3182,7 @@ export namespace Prisma {
     email?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    roleId?: SortOrder
+    roleName?: SortOrder
   }
 
   export type UsersAvgOrderByAggregateInput = {
@@ -3195,7 +3195,7 @@ export namespace Prisma {
     email?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    roleId?: SortOrder
+    roleName?: SortOrder
   }
 
   export type UsersMinOrderByAggregateInput = {
@@ -3204,7 +3204,7 @@ export namespace Prisma {
     email?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    roleId?: SortOrder
+    roleName?: SortOrder
   }
 
   export type UsersSumOrderByAggregateInput = {
@@ -3518,7 +3518,7 @@ export namespace Prisma {
     email: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    roleId: string
+    roleName: string
   }
 
   export type UsersUncheckedCreateWithoutContactsInput = {
@@ -3527,7 +3527,7 @@ export namespace Prisma {
     email: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    roleId: string
+    roleName: string
   }
 
   export type UsersCreateOrConnectWithoutContactsInput = {
@@ -3551,7 +3551,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    roleId?: StringFieldUpdateOperationsInput | string
+    roleName?: StringFieldUpdateOperationsInput | string
   }
 
   export type UsersUncheckedUpdateWithoutContactsInput = {
@@ -3560,7 +3560,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    roleId?: StringFieldUpdateOperationsInput | string
+    roleName?: StringFieldUpdateOperationsInput | string
   }
 
   export type ContactsCreateManyUserInput = {

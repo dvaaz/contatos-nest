@@ -22,7 +22,7 @@ model Users { // Usuarios do sistema
   email String  @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  roleId String
+  roleName String
   contacts Contacts[]
   
   @@map("users") // Define como será a referência ao objeto 
