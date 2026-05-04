@@ -38,7 +38,10 @@ Esse projeto tem como objetivo estudar as causas de conflitos na conexão NESTJS
     * est g service database/prisma
     * nest g module database/prisma
   9. Configure o Service e o Module
-  10. 
+  10. No Service do seu objeto o Prisma faz a maior parte do trabalho, incluindo a verificação dos objetos.
+  11. Configure o Modulo do seu objeto para receber o PrismaService
+  12. Configure o Controller, use Promises
+  
 
   Principais paginas utilizadas::
   <a href="https://www.prisma.io/docs/guides/frameworks/nestjs#52-register-services-in-the-app-module">
