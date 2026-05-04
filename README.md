@@ -13,9 +13,10 @@ Esse projeto tem como objetivo estudar as causas de conflitos na conexão NESTJS
    <p>Atenção, não há adapter de mysql (adapter-mariadb) na versao 5
    <br> por essa razão é utilizado o OnInit dentro do modulo de conexão prisma</p> 
 
+   É nescessário que haja um modulo para exportar o prisma service
+
    * nota, o guia do site prisma gez com que dois schema.prisma fossem criados
 
-   É nescessário que haja um modulo para exportar o prisma service
 
 
 
