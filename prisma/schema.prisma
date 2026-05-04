@@ -1,0 +1,46 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Roles {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  users     Users[]
+
+  @@map("roles")
+}
+
+model Users {
+  id        Int        @id @default(autoincrement())
+  name      String
+  email     String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  roleId    String
+  contacts  Contacts[]
+  roles     Roles      @relation(fields: [roleId], references: [id])
+
+  @@index([roleId], map: "users_roleId_fkey")
+  @@map("users")
+}
+
+model Contacts {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      Users    @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "contacts_userId_fkey")
+  @@map("contacts")
+}
