@@ -15,15 +15,27 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+model Roles { // Define as responsabilidades
+  id    String @id @default(uuid())
+  name  String @unique
+  createdAt DateTime @default(now())
+  users Users[]
+
+
+  @@map("roles") // Define como será a referência ao objeto 
+}
 
 model Users { // Usuarios do sistema
   id    Int     @id @default(autoincrement())
   name  String
   email String  @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  roleName String
+  createdAt DateTime @default(now()) 
+  updatedAt DateTime @updatedAt 
+  
+  roles Roles @relation(fields: [roleId], references: [id])
+  roleId String
   contacts Contacts[]
+
   
   @@map("users") // Define como será a referência ao objeto 
 }
@@ -34,6 +46,9 @@ model Contacts { // Contatos do sistema
   email String
   phone String
   userId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   user Users @relation(fields: [userId], references: [id])
 
