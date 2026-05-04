@@ -7,6 +7,12 @@ import { Role } from './entities/role.entity';
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 
+  @Get()
+  test() {
+    console.log('RolesController test endpoint hit!!');
+    return this.rolesService.test();
+  }
+
   @Post('create') 
   create(@Body() data: RoleDto) : Promise<Role> {
     return this.rolesService.create(data);

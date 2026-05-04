@@ -7,6 +7,11 @@ import { Prisma, Roles } from '../generated/prisma/client.js';
 export class RolesService {
   constructor(private prisma: PrismaService) {}
 
+  async test() {
+        console.log('Prisma Instance:', this.prisma);
+        console.log('Roles Model:', this.prisma?.roles); // Veja se isso imprime 'undefined'
+  }
+
   /**
    *  Metodo para buscar um role específico, usando o método findUnique do Prisma Client, que retorna registro único baseado em um filtro de busca.
    * @param roleWhereUniqueInput
@@ -39,23 +44,11 @@ async findRoles(params: {
     });
   }
 
-
-  // async create(data: RoleDto) {
-  //   return this.prisma.roles.create({
-  //     data,
-  //   });
-  // }
   async create(data: RoleDto) {
-  console.log('Prisma Instance:', this.prisma);
-  console.log('Roles Model:', this.prisma?.roles); // Veja se isso imprime 'undefined'
-  
-  return this.prisma.roles.create({
-    data: {
-        name: data.name, // Mapeie os campos explicitamente para testar
-    },
-  });
+    return this.prisma.roles.create({
+      data,
+    });
   }
-
   
   async update (params: { 
     where: Prisma.RolesWhereUniqueInput; data: Prisma.RolesUpdateInput }): Promise<Roles> {
