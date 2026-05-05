@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { RolesService } from './roles.service';
 import type { RoleDto } from './dto/role.dto';
-import { Role } from './entities/role.entity';
+import { Roles as RoleModel } from '../generated/prisma/client.js';
 
 @Controller('roles')
 export class RolesController {
@@ -14,30 +14,30 @@ export class RolesController {
   }
 
   @Post('create') 
-  create(@Body() data: RoleDto) : Promise<Role> {
+  create(@Body() data: RoleDto) : Promise<RoleModel> {
     return this.rolesService.create(data);
   }
   
   @Get('find/:name')
-  findOne(@Param('name') name: string) : Promise<Role | null> {
+  findOne(@Param('name') name: string) : Promise<RoleModel   | null> {
     return this.rolesService.findRole({ name: name });
   }
 
   @Get('all')
-  findAll(): Promise<Role[]> {
+  findAll(): Promise<RoleModel[]> {
     return this.rolesService.findRoles({});
   }
 
 
   @Patch('update/:name')
-  update(@Param('name') name: string, @Body() updateRoleDto: RoleDto): Promise<Role> {
+  update(@Param('name') name: string, @Body() data: RoleDto): Promise<RoleModel> {
     return this.rolesService.update({ 
-      where: { name: name }, data: updateRoleDto 
+      where: { name: name }, data: data 
     });
   }
 
   @Delete('delete/:name')
-  remove(@Param('name') name: string) : Promise<Role> {
+  remove(@Param('name') name: string) : Promise<RoleModel> {
     return this.rolesService.remove({ name: name });
   }
 }

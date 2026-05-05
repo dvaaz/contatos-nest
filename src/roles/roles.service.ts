@@ -26,6 +26,29 @@ async findRole(RolesWhereUniqueInput: Prisma.RolesWhereUniqueInput): Promise<Rol
 }
 
 /**
+ * Busca role de usuario
+ * @returns Roles | null
+ */
+  async findUser(params: Prisma.RolesWhereUniqueInput): Promise<Roles | null> {
+    // 1. Busca a role pelo nome técnico dela
+    return await this.prisma.roles.findUnique({
+      where: { name: 'ROLE_USER' },
+    });
+  }
+
+  /**
+   * Busca role de admin
+   * @returns Roles | null
+   */
+  async findAdmin(params: Prisma.RolesWhereUniqueInput): Promise<Roles | null> {
+    // 1. Busca a role pelo nome técnico dela
+    return await this.prisma.roles.findUnique({
+      where: { name: 'ROLE_ADMIN' },
+    });
+  }
+
+
+/**
  * Listar todas os roles, usando o método findMany do Prisma Client, que retorna uma lista de registros baseado em filtros de busca, ordenação e paginação.
  * @returns Roles[]
  */

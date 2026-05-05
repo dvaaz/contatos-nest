@@ -3,8 +3,10 @@ import { RolesService } from './roles.service';
 import { RolesController } from './roles.controller';
 import { PrismaService } from '../database/prisma/prisma.service';
 
+
 @Module({
   controllers: [RolesController],
   providers: [RolesService, PrismaService],
 })
+
 export class RolesModule {}
