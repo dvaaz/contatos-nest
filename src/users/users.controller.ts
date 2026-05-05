@@ -2,15 +2,32 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UsersService } from './users.service';
 import type { UserDto } from './dto/user.dto';
 import { Users as UserModel } from '../generated/prisma/client.js';
+import { User } from './entities/user.entity';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  /**
+   * Cria um usuario comum
+   * @param data
+   * @returns 
+   */
   @Post()
   create(@Body() data: UserDto) : Promise<UserModel> {
     return this.usersService.create(data);
   }
+
+  /**
+   * Cria um usuario admin
+   * @returns
+   */
+  // Alterar futuramente para que seja criado um admin apenas por outro admin
+  @Post('admin')
+  createAdmin(@Body() data: UserDto) : Promise<UserModel> {
+    return this.usersService.createAdmin(data);
+  }
+
 
   /**
    * Controller para listar usuarios comuns

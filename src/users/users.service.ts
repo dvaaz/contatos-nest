@@ -1,16 +1,7 @@
 
-
-  //   async remove(where: Prisma.RolesWhereUniqueInput): Promise<Roles> {
-  //     return this.prisma.roles.delete({
-  //       where,
-  //     });
-  //   }
-  // }
-
 import { Injectable } from "@nestjs/common/decorators/core/injectable.decorator";
 import { PrismaService } from "../database/prisma/prisma.service";
 import { RolesService } from "../roles/roles.service";
-import { UserDto } from "./dto/user.dto";
 import { Prisma, Roles, Users } from '../generated/prisma/client.js';
 import { ForbiddenException } from "@nestjs/common";
 

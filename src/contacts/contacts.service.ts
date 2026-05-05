@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateContactDto } from './dto/create-contact.dto';
-import { UpdateContactDto } from './dto/update-contact.dto';
+import { ContactDto } from './dto/contact.dto';
+
 
 @Injectable()
 export class ContactsService {
-  create(createContactDto: CreateContactDto) {
+  create(data: ContactDto) {
     return 'This action adds a new contact';
   }
 
@@ -16,7 +16,7 @@ export class ContactsService {
     return `This action returns a #${id} contact`;
   }
 
-  update(id: number, updateContactDto: UpdateContactDto) {
+  update(id: number, data: ContactDto) {
     return `This action updates a #${id} contact`;
   }
 
