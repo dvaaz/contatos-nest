@@ -1,9 +1,10 @@
-
 import { Injectable } from "@nestjs/common/decorators/core/injectable.decorator";
 import { PrismaService } from "../database/prisma/prisma.service";
 import { RolesService } from "../roles/roles.service";
 import { Prisma, Roles, Users } from '../generated/prisma/client.js';
 import { ForbiddenException } from "@nestjs/common";
+import { UserDto } from "./dto/user.dto";
+import { User } from "./entities/user.entity";
 
   @Injectable()
   export class UsersService {
@@ -36,7 +37,7 @@ import { ForbiddenException } from "@nestjs/common";
     orderBy?: Prisma.UsersOrderByWithRelationInput;
   }): Promise<Users[]> {
     // busca id do role de usuario comum
-    const role = await this.rolesService.findUser({ name: 'ROLE_USER' });
+    const role = await this.rolesService.findUser();
     
     const { skip, take, cursor, where, orderBy } = params;
     return this.prisma.users.findMany({
@@ -65,7 +66,7 @@ async findAdmins(params: {
   orderBy?: Prisma.UsersOrderByWithRelationInput;
 }): Promise<Users[]> {
   // busca id do role de admin
-  const role = await this.rolesService.findAdmin({ name: 'ROLE_ADMIN' });
+  const role = await this.rolesService.findAdmin();
     const { skip, take, cursor, where, orderBy } = params;
     return this.prisma.users.findMany({
       skip,
@@ -85,12 +86,16 @@ async findAdmins(params: {
  * @param data 
  * @returns 
  */
-  async create(data: any) {
+  async create(data: UserDto): Promise<Users> {
     // verifica se o role existe atraves do nome do role
-    const role = await this.rolesService.findUser({ name: data.roleName });
+    const role = await this.rolesService.findUser();
     // caso ainda não haja a role de usuario comum, lança um erro
     if (!role) {
-      throw new Error(`Role with name ${data.roleName} not found`);
+      throw new Error(`Role not found`);
+    }
+    // checagem de dados obrigatórios
+    if (!data.name || !data.email) {
+      throw new Error('Name and email are required to create a user');
     }
     return this.prisma.users.create({
       data: {
@@ -106,10 +111,15 @@ async findAdmins(params: {
    * @param data 
    * @returns
    */
-  async createAdmin(data: any) {
-  const role = await this.rolesService.findAdmin({ name: data.roleName });
+  async createAdmin(data: UserDto): Promise<Users> {
+  const role = await this.rolesService.findAdmin();
   if (!role) {
-    throw new Error(`Role with name ${data.roleName} not found`);
+    throw new Error(`Role not found`);
+  }
+
+  // checagem de dados obrigatórios
+  if (!data.name || !data.email) {
+    throw new Error('Name and email are required to create an admin user');
   }
   return this.prisma.users.create({
     data: {
@@ -154,9 +164,9 @@ async findAdmins(params: {
       }): Promise<Users> {
         const { where } = params;
         // busca role de usuario comum
-        const role = await this.rolesService.findUser({ name: 'ROLE_USER' });
+        const role = await this.rolesService.findUser();
         if (!role) {
-          throw new Error(`Role with name ROLE_USER not found`);
+          throw new Error(`Role not found`);
         }
         // se usuario nao existir, lança um erro
         const user = await this.prisma.users.findUnique({
@@ -188,7 +198,7 @@ async findAdmins(params: {
         throw new Error(`User with ID ${where.id} not found`);
       }
       // verifica role
-      const role = await this.rolesService.findRole({ name: 'ROLE_ADMIN' });
+      const role = await this.rolesService.findAdmin();
       if (user.roleId === role?.id) {
         throw new ForbiddenException(`Cannot delete user with admin role`); // mudar descricao para producao
       }

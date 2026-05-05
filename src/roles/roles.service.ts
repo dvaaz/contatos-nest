@@ -29,7 +29,7 @@ async findRole(RolesWhereUniqueInput: Prisma.RolesWhereUniqueInput): Promise<Rol
  * Busca role de usuario
  * @returns Roles | null
  */
-  async findUser(params: Prisma.RolesWhereUniqueInput): Promise<Roles | null> {
+  async findUser(): Promise<Roles | null> {
     // 1. Busca a role pelo nome técnico dela
     return await this.prisma.roles.findUnique({
       where: { name: 'ROLE_USER' },
@@ -40,7 +40,7 @@ async findRole(RolesWhereUniqueInput: Prisma.RolesWhereUniqueInput): Promise<Rol
    * Busca role de admin
    * @returns Roles | null
    */
-  async findAdmin(params: Prisma.RolesWhereUniqueInput): Promise<Roles | null> {
+  async findAdmin(): Promise<Roles | null> {
     // 1. Busca a role pelo nome técnico dela
     return await this.prisma.roles.findUnique({
       where: { name: 'ROLE_ADMIN' },
@@ -69,7 +69,7 @@ async findRoles(params: {
     });
   }
 
-  async create(data: RoleDto) {
+  async create(data: RoleDto) : Promise<Roles> {
     return this.prisma.roles.create({
       data,
     });
