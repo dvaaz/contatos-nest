@@ -19,7 +19,7 @@ import { User } from "./entities/user.entity";
    * @param data
    * @return Users | null
    */
-  async findUser(data: Prisma.UsersWhereUniqueInput): Promise<Users | null> {
+  async findUser(data: Prisma.UsersWhereUniqueInput) {
     return this.prisma.users.findUnique({
       where: data,
     });
@@ -35,7 +35,7 @@ import { User } from "./entities/user.entity";
     cursor?: Prisma.UsersWhereUniqueInput;
     where?: Prisma.UsersWhereInput;
     orderBy?: Prisma.UsersOrderByWithRelationInput;
-  }): Promise<Users[]> {
+  }) {
     // busca id do role de usuario comum
     const role = await this.rolesService.findUser();
     
@@ -64,7 +64,7 @@ async findAdmins(params: {
   cursor?: Prisma.UsersWhereUniqueInput;
   where?: Prisma.UsersWhereInput;
   orderBy?: Prisma.UsersOrderByWithRelationInput;
-}): Promise<Users[]> {
+}) {
   // busca id do role de admin
   const role = await this.rolesService.findAdmin();
     const { skip, take, cursor, where, orderBy } = params;
@@ -86,7 +86,7 @@ async findAdmins(params: {
  * @param data 
  * @returns 
  */
-  async create(data: UserDto): Promise<Users> {
+  async create(data: UserDto) {
     // verifica se o role existe atraves do nome do role
     const role = await this.rolesService.findUser();
     // caso ainda não haja a role de usuario comum, lança um erro
@@ -111,7 +111,7 @@ async findAdmins(params: {
    * @param data 
    * @returns
    */
-  async createAdmin(data: UserDto): Promise<Users> {
+  async createAdmin(data: UserDto) {
   const role = await this.rolesService.findAdmin();
   if (!role) {
     throw new Error(`Role not found`);
@@ -136,7 +136,7 @@ async findAdmins(params: {
    * @returns 
    */
   async update(params: { 
-    where: Prisma.UsersWhereUniqueInput; data: Prisma.UsersUpdateInput }): Promise<Users> {
+    where: Prisma.UsersWhereUniqueInput; data: Prisma.UsersUpdateInput }) {
       const { where, data } = params;
       let updateData: Prisma.UsersUpdateInput = { ...data };
       // se usuario nao existir, lança um erro
@@ -161,7 +161,7 @@ async findAdmins(params: {
      */
       async revokeAdmin(params: {
         where: Prisma.UsersWhereUniqueInput; 
-      }): Promise<Users> {
+      }) {
         const { where } = params;
         // busca role de usuario comum
         const role = await this.rolesService.findUser();
@@ -189,7 +189,7 @@ async findAdmins(params: {
      * Delete um usuario por id, não é possivel deletar ADMIN
      * @param id ou email do usuario
      */
-    async remove(where: Prisma.UsersWhereUniqueInput): Promise<Users> {
+    async remove(where: Prisma.UsersWhereUniqueInput) {
       // verifica se o usuario existe
       const user = await this.prisma.users.findUnique({
         where,

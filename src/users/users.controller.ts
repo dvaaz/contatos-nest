@@ -43,12 +43,12 @@ export class UsersController {
    * @returns 
    */
   @Get('admins')
-  findAdmins() {
+  findAdmins(): Promise<UserModel[]> {
     return this.usersService.findAdmins({});
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string): Promise<UserModel | null> {
     return this.usersService.findUser({ id: +id });
   }
 

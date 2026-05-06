@@ -19,7 +19,7 @@ export class RolesService {
    * @param roleWhereUniqueInput
    * @returns Roles | null
    */
-async findRole(RolesWhereUniqueInput: Prisma.RolesWhereUniqueInput): Promise<Roles | null> {
+async findRole(RolesWhereUniqueInput: Prisma.RolesWhereUniqueInput) {
   return this.prisma.roles.findUnique({
     where: RolesWhereUniqueInput,
   });
@@ -29,7 +29,7 @@ async findRole(RolesWhereUniqueInput: Prisma.RolesWhereUniqueInput): Promise<Rol
  * Busca role de usuario
  * @returns Roles | null
  */
-  async findUser(): Promise<Roles | null> {
+  async findUser() {
     // 1. Busca a role pelo nome técnico dela
     return await this.prisma.roles.findUnique({
       where: { name: 'ROLE_USER' },
@@ -40,7 +40,7 @@ async findRole(RolesWhereUniqueInput: Prisma.RolesWhereUniqueInput): Promise<Rol
    * Busca role de admin
    * @returns Roles | null
    */
-  async findAdmin(): Promise<Roles | null> {
+  async findAdmin() {
     // 1. Busca a role pelo nome técnico dela
     return await this.prisma.roles.findUnique({
       where: { name: 'ROLE_ADMIN' },
@@ -69,14 +69,14 @@ async findRoles(params: {
     });
   }
 
-  async create(data: RoleDto) : Promise<Roles> {
+  async create(data: RoleDto) {
     return this.prisma.roles.create({
       data,
     });
   }
   
   async update (params: { 
-    where: Prisma.RolesWhereUniqueInput; data: Prisma.RolesUpdateInput }): Promise<Roles> {
+    where: Prisma.RolesWhereUniqueInput; data: Prisma.RolesUpdateInput }) {
     const { where, data } = params;
     return this.prisma.roles.update({
       data,
@@ -84,7 +84,7 @@ async findRoles(params: {
     });
   }
 
-  async remove(where: Prisma.RolesWhereUniqueInput): Promise<Roles> {
+  async remove(where: Prisma.RolesWhereUniqueInput) {
     return this.prisma.roles.delete({
       where,
     });

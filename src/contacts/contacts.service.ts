@@ -15,7 +15,7 @@ export class ContactsService {
    * @param data 
    * @returns 
    */
-  async create(data: ContactDto): Promise<Contacts> {
+  async create(data: ContactDto)  {
     // checagem de usuario
     if (!data.userEmail) {
       throw new Error('User email is required');
@@ -49,7 +49,7 @@ export class ContactsService {
    * @param email 
    * @returns 
    */
-  async findAll(id: string): Promise<Contacts[]> {
+  async findAll(id: string) {
     // busca o usuário pelo email fornecido
     const user = await this.prisma.users.findUnique({
       where: {
@@ -72,7 +72,7 @@ export class ContactsService {
    * @param id 
    * @returns 
    */
-  async findByLetter(nameStartsWith: string): Promise<Contacts[]> {
+  async findByLetter(nameStartsWith: string) {
  //   // busca o usuário pelo email fornecido
     // const user = await this.prisma.users.findUnique({
     //   where: {
@@ -97,7 +97,7 @@ export class ContactsService {
    * Busca contato por id, com checagem de que o contato seja do usuário
    * @param id 
    */
-  async findOne(id: number): Promise<Contacts | null> {
+  async findOne(id: number) {
 //   // busca o usuário pelo email fornecido
     // const user = await this.prisma.users.findUnique({
     //   where: {
