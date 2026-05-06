@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { ContactsService } from './contacts.service';
 import type { ContactDto } from './dto/contact.dto';
 import { Contacts as ContactModel } from '../generated/prisma/client.js';
@@ -12,9 +12,9 @@ export class ContactsController {
     return this.contactsService.create(data);
   }
 
-  @Get(':id/:email')
-  findOne(@Param('id') id: number, @Param('email') email: string): Promise<ContactModel | null> {
-    return this.contactsService.findOne(id, email);
+  @Get(':id')
+  findOne(@Param('id') id: number): Promise<ContactModel | null> {
+    return this.contactsService.findOne(id);
   }
 
   @Get('all/:email')
@@ -22,18 +22,25 @@ export class ContactsController {
     return this.contactsService.findAll(email);
   }
 
-  @Get('letter/:name/:email')
-  findByLetter(@Param('name') name: string, @Param('email') email: string): Promise<ContactModel[]> {
-    return this.contactsService.findByLetter(email, name);
+  @Get('letter/:letter')
+  findByLetter(
+    @Param('letter') letter: string,
+    // @Query('email') email: string,
+  ): Promise<ContactModel[]> {
+    return this.contactsService.findByLetter(letter);
   }
 
-  @Patch(':id/:userEmail')
-  update(@Param('id') id: string, @Param('userEmail') userEmail: string, @Body() data: ContactDto) {
-    return this.contactsService.update(+id, userEmail, data);
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    // @Query('userEmail') userEmail: string,
+    @Body() data: ContactDto
+  ): Promise<ContactModel> {
+    return this.contactsService.update(+id, data);
   }
 
-  @Delete(':id/:userEmail')
-  remove(@Param('id') id: string, @Param('userEmail') userEmail: string) {
-    return this.contactsService.remove(+id, userEmail);
+  @Delete(':id')
+  remove(@Param('id') id: string) : Promise<ContactModel> {
+    return this.contactsService.remove(+id);
   }
 }
